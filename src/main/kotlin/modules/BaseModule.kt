@@ -1,8 +1,6 @@
 package modules
 
-import java.math.BigDecimal
-
 interface BaseModule {
-    val ln: (BigDecimal) -> BigDecimal
-    val sin: (BigDecimal) -> BigDecimal
+    val ln: (Double) -> Double
+    val cos: (Double) -> Double
 }
