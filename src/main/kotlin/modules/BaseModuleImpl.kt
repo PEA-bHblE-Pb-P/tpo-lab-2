@@ -10,7 +10,7 @@ class BaseModuleImpl: BaseModule {
                 x.isNaN() || x < 0 -> Double.NaN
                 x == 0.0 -> Double.NEGATIVE_INFINITY
                 x == 1.0 -> 0.0
-                x > 0 && x <= 2 -> calcLnByMercatorSeries(x-1, eps)
+                x <= 2 -> calcLnByMercatorSeries(x-1, eps)
                 x == Double.POSITIVE_INFINITY -> Double.POSITIVE_INFINITY
                 else -> calcLnEasy(x, eps)
             }
