@@ -1,6 +1,6 @@
 package modules
 
 interface BaseModule {
-    val ln: (Double) -> Double
-    val cos: (Double) -> Double
+    val ln: (Double, Double) -> Double
+    val cos: (Double, Double) -> Double
 }

@@ -10,5 +10,5 @@ class SystemModuleImpl(private val baseModule: BaseModule): SystemModule {
     override val tan: (Double) -> Double
         get() = TODO("Not yet implemented")
     override val log: (Double, Double) -> Double
-        get() = { a, b -> baseModule.ln(b) / baseModule.ln(a) }
+        get() = { a, b -> baseModule.ln(b, 0.0000000000000001) / baseModule.ln(a, 0.0000000000000001) }
 }
