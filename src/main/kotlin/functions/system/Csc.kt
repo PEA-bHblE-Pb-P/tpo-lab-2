@@ -11,10 +11,9 @@ class Csc(
         val cosVal = baseModule.cos(x, eps)
         val result = if (cosVal.isNaN() || cosVal == 0.0) Double.NaN else 1 / cosVal
         return result.also {
-            csvLogger?.use {
-                it.write("$x,$result")
-                it.newLine()
-            }
+            csvLogger?.write("$x,$result")
+            csvLogger?.newLine()
+            csvLogger?.flush()
         }
     }
 }

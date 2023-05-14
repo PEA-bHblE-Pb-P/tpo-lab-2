@@ -32,10 +32,9 @@ class Cos(
         }
 
         return curr.also {
-            csvLogger?.use {
-                it.write("$x,$curr")
-                it.newLine()
-            }
+            csvLogger?.write("$x,$curr")
+            csvLogger?.newLine()
+            csvLogger?.flush()
         }
     }
 }

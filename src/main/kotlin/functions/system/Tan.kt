@@ -13,10 +13,9 @@ class Tan(
         val result = if (cosVal.isNaN() || sinVal.isNaN() || cosVal == 0.0)
             Double.NaN else sinVal / cosVal
         return result.also {
-            csvLogger?.use {
-                it.write("$x,$result")
-                it.newLine()
-            }
+            csvLogger?.write("$x,$result")
+            csvLogger?.newLine()
+            csvLogger?.flush()
         }
     }
 }

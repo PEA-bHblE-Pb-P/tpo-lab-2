@@ -1,5 +1,8 @@
 package util
 
+import kotlin.io.path.Path
+import kotlin.io.path.bufferedWriter
+
 object CsvUtils {
     fun readCsvFileValues(fileName: String): Map<Double, Double> =
         javaClass.getResourceAsStream(fileName)?.bufferedReader().use { reader ->
@@ -10,5 +13,11 @@ object CsvUtils {
                 res[x] = y
             }
             return res
+        }
+
+    fun csvFileWriter(path: String, head: String) =
+        Path(path).bufferedWriter().also { writer ->
+            writer.write(head)
+            writer.newLine()
         }
 }

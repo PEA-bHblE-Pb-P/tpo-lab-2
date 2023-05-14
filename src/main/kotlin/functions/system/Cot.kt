@@ -14,10 +14,9 @@ class Cot(
             Double.NaN
         else cosVal / sinVal
         return result.also {
-            csvLogger?.use {
-                it.write("$x,$result")
-                it.newLine()
-            }
+            csvLogger?.write("$x,$result")
+            csvLogger?.newLine()
+            csvLogger?.flush()
         }
     }
 }

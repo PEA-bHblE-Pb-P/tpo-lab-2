@@ -29,10 +29,9 @@ class Sin(
             abs(result) <= eps -> 0.0
             else -> result
         }.also { res ->
-            csvLogger?.use {
-                it.write("$x,$res")
-                it.newLine()
-            }
+            csvLogger?.write("$x,$res")
+            csvLogger?.newLine()
+            csvLogger?.flush()
         }
     }
 }
