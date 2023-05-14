@@ -1,6 +1,6 @@
 package modules
 
-class SystemModuleImpl(private val baseModule: BaseModule): SystemModule {
+class SystemModuleImpl(private val baseModule: BaseModule) : SystemModule {
     override val cot: (Double) -> Double
         get() = TODO("Not yet implemented")
     override val csc: (Double) -> Double
