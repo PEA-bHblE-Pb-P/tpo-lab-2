@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package modules
 
 import kotlin.math.abs
