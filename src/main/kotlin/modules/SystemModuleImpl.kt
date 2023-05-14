@@ -5,20 +5,11 @@ import functions.system.*
 import kotlin.math.pow
 
 class SystemModuleImpl(private val baseModule: BaseModule) : SystemModule {
-    override val cot: (Double, Double) -> Double
-        get() = Cot(baseModule)
-
-    override val tan: (Double, Double) -> Double
-        get() = Tan(baseModule)
-
-    override val csc: (Double, Double) -> Double
-        get() = Csc(baseModule)
-
-    override val sin: (Double, Double) -> Double
-        get() = Sin(baseModule)
-
-    override val log: (Double, Double, Double) -> Double
-        get() = Log(baseModule)
+    override val cot = Cot(baseModule)
+    override val tan = Tan(baseModule)
+    override val csc = Csc(baseModule)
+    override val sin = Sin(baseModule)
+    override val log = Log(baseModule)
 
     override val function: (Double, Double) -> Double
         get() = fun(x: Double, eps: Double): Double {
