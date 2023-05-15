@@ -1,4 +1,5 @@
 @file:Suppress("MagicNumber")
+
 package modules
 
 import functions.system.*
@@ -16,9 +17,10 @@ class SystemModuleImpl(private val baseModule: BaseModule) : SystemModule {
             return if (x <= 0) {
                 (((((tan(x, eps) - cot(x, eps)) / cot(x, eps)).pow(3)) + baseModule.cos(x, eps)).pow(2))
             } else {
-                (((((log(3.0, x, eps) * log(10.0, x, eps)) + log(5.0, x, eps)) + (log(3.0, x, eps)
-                        - log(10.0, x, eps))) / log(2.0, x, eps))
-                        + (log(2.0, x, eps) + (baseModule.ln(x, eps) + baseModule.ln(2.0, x))))
+                ((((log(3.0, x, eps) * log(10.0, x, eps) + log(5.0, x, eps))
+                        + (log(3.0, x, eps) - log(10.0, x, eps))) / log(2.0, x, eps))
+                        + (log(2.0, x, eps) + (baseModule.ln(x, eps) + log(2.0, x, eps))))
+
             }
         }
 }
