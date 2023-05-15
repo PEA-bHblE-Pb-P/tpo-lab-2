@@ -8,7 +8,7 @@ class Log(
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double, Double) -> Double {
     override fun invoke(a: Double, b: Double, eps: Double): Double {
-        return baseModule.ln(b, eps * 0.1) / baseModule.ln(a, eps * 0.1).also { res ->
+        return baseModule.ln(b, eps * 0.2) / baseModule.ln(a, eps * 0.2).also { res ->
             csvLogger?.write("$a,$b,$res")
             csvLogger?.newLine()
             csvLogger?.flush()

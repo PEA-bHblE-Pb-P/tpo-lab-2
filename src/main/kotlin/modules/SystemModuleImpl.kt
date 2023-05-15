@@ -8,7 +8,6 @@ import kotlin.math.pow
 class SystemModuleImpl(private val baseModule: BaseModule) : SystemModule {
     override val cot = Cot(baseModule)
     override val tan = Tan(baseModule)
-    override val csc = Csc(baseModule)
     override val sin = Sin(baseModule)
     override val log = Log(baseModule)
 

@@ -28,15 +28,17 @@ class TableBaseModule : BaseModule {
         get() = { x, _ -> cotTableValues[x] ?: throw IllegalStateException("No table value for $x") }
     val csc: (Double, Double) -> Double
         get() = { x, _ -> cscTableValues[x] ?: throw IllegalStateException("No table value for $x") }
-    val log: (Double Double, Double) -> Double
+    val log: (Double, Double, Double) -> Double
         get() = { a, b, _ ->
-        when {
-            a == 2.0 -> log2TableValues[b] ?: throw IllegalStateException("No table value for $x")
-            a == 3.0 -> log3TableValues[b] ?: throw IllegalStateException("No table value for $x")
-            a == 5.0 -> log5TableValues[b] ?: throw IllegalStateException("No table value for $x")
-            a == 10.0 -> log10TableValues[b] ?: throw IllegalStateException("No table value for $x")
-            else -> {throw IllegalStateException("No table value for $x") }
-        }
+            when (a) {
+                2.0 -> log2TableValues[b] ?: throw IllegalStateException("No table value for $b")
+                3.0 -> log3TableValues[b] ?: throw IllegalStateException("No table value for $b")
+                5.0 -> log5TableValues[b] ?: throw IllegalStateException("No table value for $b")
+                10.0 -> log10TableValues[b] ?: throw IllegalStateException("No table value for $b")
+                else -> {
+                    throw IllegalStateException("No table value for a = $a")
+                }
+            }
         }
 
 

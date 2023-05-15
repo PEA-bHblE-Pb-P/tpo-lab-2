@@ -2,11 +2,12 @@ package functions.base
 
 import java.io.BufferedWriter
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 import kotlin.math.pow
 
 class Cos(
     private val csvLogger: BufferedWriter? = null
-): (Double, Double) -> Double {
+) : (Double, Double) -> Double {
     /**
      * https://scask.ru/f_book_sm_math1.php?id=130
      */
@@ -25,12 +26,18 @@ class Cos(
         while (diff > eps) {
             pref *= -1.0
             prev = curr
-            curr += pref.times(x2.pow(2*i)).div(fact)
+            curr += pref.times(x2.pow(2 * i)).div(fact)
             diff = abs(curr - prev)
             i++
-            fact *= 2*i*(2*i-1)
+            fact *= 2 * i * (2 * i - 1)
         }
-
+        if ((curr.absoluteValue - 1.0).absoluteValue < eps) {
+            if (curr < 0) {
+                curr = -1.0
+            } else {
+                curr = 1.0
+            }
+        }
         return curr.also {
             csvLogger?.write("$x,$curr")
             csvLogger?.newLine()

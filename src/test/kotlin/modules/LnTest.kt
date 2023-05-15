@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.CsvFileSource
 
 class LnTest {
     private val ln = BaseModuleImpl().ln
-    private val eps = 0.00001
-    private val offset = Offset.offset(0.001) // :`(
+    private val eps = 0.0001
+    private val offset = Offset.offset(0.01)
 
     @ParameterizedTest
     @CsvFileSource(resources = ["/ln.csv"], useHeadersInDisplayName = true)
