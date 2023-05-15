@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package functions.base
 
 import java.io.BufferedWriter

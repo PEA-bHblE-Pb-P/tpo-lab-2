@@ -1,12 +1,14 @@
+@file:Suppress("MagicNumber")
 package functions.system
 
+import functions.base.Cos
 import modules.BaseModule
 import java.io.BufferedWriter
 import kotlin.math.abs
 import kotlin.math.sqrt
 
 class Sin(
-    private val baseModule: BaseModule,
+    private val cos: (Double, Double) -> Double,
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double) -> Double {
     override fun invoke(x: Double, eps: Double): Double {
@@ -18,9 +20,9 @@ class Sin(
         while (normalizedX < 0) normalizedX += 2 * Math.PI
         while (normalizedX > 2 * Math.PI) normalizedX -= 2 * Math.PI
         val result: Double = if (normalizedX > Math.PI) {
-            -1 * sqrt(1 - baseModule.cos(xInit, eps) * baseModule.cos(xInit, eps))
+            -1 * sqrt(1 - cos(xInit, eps) * cos(xInit, eps))
         } else {
-            sqrt(1 - baseModule.cos(xInit, eps) * baseModule.cos(xInit, eps))
+            sqrt(1 - cos(xInit, eps) * cos(xInit, eps))
         }
         return when {
             abs(result) > 1 -> Double.NaN
