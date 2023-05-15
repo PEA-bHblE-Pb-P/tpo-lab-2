@@ -8,8 +8,8 @@ import java.io.BufferedWriter
 import kotlin.math.abs
 
 class Cot(
-    private val cos: (Double, Double) -> Double,
-    private val sin: (Double, Double) -> Double,
+    private val cos: (Double, Double) -> Double = Cos(),
+    private val sin: (Double, Double) -> Double = Sin(Cos()),
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double) -> Double {
     override fun invoke(x: Double, eps: Double): Double {

@@ -8,7 +8,7 @@ import kotlin.math.abs
 import kotlin.math.sqrt
 
 class Sin(
-    private val cos: (Double, Double) -> Double,
+    private val cos: (Double, Double) -> Double = Cos(),
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double) -> Double {
     override fun invoke(x: Double, eps: Double): Double {

@@ -32,7 +32,7 @@ class SystemModuleImpl(
 
             }
             return result.also {
-                csvLogger?.write("$x,$result")
+                csvLogger?.write("%.5f".format(x) + "\t" + "%.5f".format(result))
                 csvLogger?.newLine()
                 csvLogger?.flush()
             }

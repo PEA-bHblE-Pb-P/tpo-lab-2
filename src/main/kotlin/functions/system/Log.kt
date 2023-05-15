@@ -6,7 +6,7 @@ import modules.BaseModule
 import java.io.BufferedWriter
 
 class Log(
-    private val ln: (Double, Double) -> Double,
+    private val ln: (Double, Double) -> Double = Ln(),
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double, Double) -> Double {
     override fun invoke(a: Double, b: Double, eps: Double): Double {
