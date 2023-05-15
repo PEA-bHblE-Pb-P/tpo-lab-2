@@ -28,7 +28,7 @@ fun main() {
         Ln(CsvUtils.csvFileWriter("Ln", "x,ln(x)")),
         CsvUtils.csvFileWriter("System", "x,system(x)")
     )
-    val start = -3.11
+    val start = -3.01
     val end = 3.1
     val step = 0.1
     var i = start
