@@ -7,9 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
 
 class SinTest {
-    private val sin = TableBaseModule().sin
-    private val eps = 0.00001
-    private val offset = Offset.offset(eps)
+    private val sin = Sin(TableBaseModule().cos)
+    private val eps = 0.00000000001
+    private val offset = Offset.offset(0.000000001)
 
     @ParameterizedTest
     @CsvFileSource(resources = ["/sin.csv"], useHeadersInDisplayName = true)
