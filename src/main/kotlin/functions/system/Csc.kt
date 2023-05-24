@@ -12,7 +12,7 @@ class Csc(
     override fun invoke(x: Double, eps: Double): Double {
         val sinVal = sin(x, eps * 0.1)
         val result = if (sinVal.isNaN() || abs(sinVal) < eps) {
-            Double.NaN
+            Double.POSITIVE_INFINITY
         } else {
             1.0 / sinVal
         }

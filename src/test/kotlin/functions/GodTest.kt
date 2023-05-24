@@ -2,10 +2,7 @@ package functions
 
 import functions.base.Cos
 import functions.base.Ln
-import functions.system.Cot
-import functions.system.Log
-import functions.system.Sin
-import functions.system.Tan
+import functions.system.*
 import modules.SystemModuleImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
@@ -22,7 +19,7 @@ class GodTest {
     fun testSinByStLib(): Collection<DynamicTest> = Sin(cos = {x, _ -> cos(x) }).let { sin ->
         range.map {
             val x = it / 10.0
-            DynamicTest.dynamicTest("$x, sin($x), eps=$offset") {
+            DynamicTest.dynamicTest("$x, sin($x), eps=${offset.value}") {
                 assertThat(sin(x, eps)).isCloseTo(kotlin.math.sin(x), offset)
             }
         }
@@ -32,7 +29,7 @@ class GodTest {
     fun testCosByStLib(): Collection<DynamicTest> = Cos().let { cos ->
         range.map {
             val x = it / 10.0
-            DynamicTest.dynamicTest("$x, cos($x), eps=$offset") {
+            DynamicTest.dynamicTest("$x, cos($x), eps=${offset.value}") {
                 assertThat(cos(x, eps)).isCloseTo(cos(x), offset)
             }
         }
@@ -42,7 +39,7 @@ class GodTest {
     fun testLnByStLib(): Collection<DynamicTest> = Ln().let { ln ->
         range.map {
             val x = it / 10.0
-            DynamicTest.dynamicTest("$x, ln($x), eps=$offset") {
+            DynamicTest.dynamicTest("$x, ln($x), eps=${offset.value}") {
                 assertThat(ln(x, eps)).isCloseTo(ln(x), offset)
             }
         }
@@ -52,7 +49,7 @@ class GodTest {
     fun testTanByStLib(): Collection<DynamicTest> = Tan().let { tan ->
         range.map {
             val x = it / 10.0
-            DynamicTest.dynamicTest("$x, tan($x), eps=$offset") {
+            DynamicTest.dynamicTest("$x, tan($x), eps=${offset.value}") {
                 assertThat(tan(x, eps)).isCloseTo(tan(x), offset)
             }
         }
@@ -63,10 +60,34 @@ class GodTest {
         val cotOffset = Offset.offset(offset.value*100)
         range.map {
             val x = it / 10.0
-            DynamicTest.dynamicTest("$x, tan($x), eps=$cotOffset") {
+            DynamicTest.dynamicTest("$x, cot($x), eps=${cotOffset.value}") {
                 assertThat(cot(x, eps)).isCloseTo(cos(x) / sin(x), cotOffset)
             }
         }
+    }
+
+    @TestFactory
+    fun testCscByStLib(): Collection<DynamicTest> = Csc().let { csc ->
+        val cscOffset = Offset.offset(offset.value*100)
+        range.map {
+            val x = it / 10.0
+            DynamicTest.dynamicTest("$x, csc($x), eps=${cscOffset.value}") {
+                assertThat(csc(x, eps)).isCloseTo(1 / sin(x), cscOffset)
+            }
+        }
+    }
+
+    @TestFactory
+    fun testLogByStLib(): Collection<DynamicTest> = Log().let { log ->
+        range.map {
+            val x = it / 10.0
+            range.map { b ->
+                val base = b / 10.0
+                DynamicTest.dynamicTest("$x, log$base ($x), eps=${offset.value}") {
+                    assertThat(log(base, x, eps)).isCloseTo(log(x, base), offset)
+                }
+            }
+        }.flatten()
     }
 
     @TestFactory
