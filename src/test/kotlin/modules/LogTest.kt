@@ -1,18 +1,13 @@
 package modules
 
+import functions.system.Log
 import org.assertj.core.api.Assertions
 import org.assertj.core.data.Offset
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
 
 class LogTest {
-    private val log = SystemModuleImpl(
-        TableBaseModule().cos,
-        TableBaseModule().cot,
-        TableBaseModule().tan,
-        TableBaseModule().sin,
-        TableBaseModule().log
-    ).log
+    private val log = Log(TableBaseModule().ln,)
     private val eps = 0.001
     private val offset = Offset.offset(eps)
 

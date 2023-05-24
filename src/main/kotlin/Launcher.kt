@@ -1,10 +1,7 @@
 @file:Suppress("MagicNumber")
 import functions.base.Cos
 import functions.base.Ln
-import functions.system.Cot
-import functions.system.Log
-import functions.system.Sin
-import functions.system.Tan
+import functions.system.*
 import modules.LoggedBaseModuleImpl
 import modules.SystemModuleImpl
 import util.CsvUtils
@@ -13,6 +10,7 @@ fun main() {
     val base = LoggedBaseModuleImpl()
     val system = SystemModuleImpl(
         Cos(CsvUtils.csvFileWriter("cos", "x,cos(x)")),
+        Ln(CsvUtils.csvFileWriter("Ln", "x,ln(x)")),
         Cot(
             base.cos,
             Sin(base.cos, CsvUtils.csvFileWriter("cot.sin", "x,sin(x)")),
@@ -25,8 +23,8 @@ fun main() {
         ),
         Sin(base.cos, CsvUtils.csvFileWriter("sin", "x,sin(x)")),
         Log(base.ln, CsvUtils.csvFileWriter("log", "x,log(x)")),
-        Ln(CsvUtils.csvFileWriter("Ln", "x,ln(x)")),
-        CsvUtils.csvFileWriter("System", "x,system(x)")
+        Csc(Sin(base.cos)),
+        CsvUtils.csvFileWriter("System", "x,system(x)"),
     )
     val start = -3.01
     val end = 3.1
