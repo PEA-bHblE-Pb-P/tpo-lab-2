@@ -4,15 +4,15 @@ import functions.base.Cos
 import functions.base.Ln
 import functions.system.*
 import modules.SystemModuleImpl
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.data.Offset
+import org.assertj.core.data.Offset.offset
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
+import util.assertByOffset
 import kotlin.math.*
 
 class GodTest {
     private val eps = 0.00000000001
-    private val offset = Offset.offset(0.000000001)
+    private val offset = offset(0.000000001)
     private val range = (-1000..1000).toList()
 
     @TestFactory
@@ -20,7 +20,11 @@ class GodTest {
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, sin($x), eps=${offset.value}") {
-                assertThat(sin(x, eps)).isCloseTo(kotlin.math.sin(x), offset)
+                assertByOffset(
+                    sin(x, eps),
+                    sin(x),
+                    offset
+                )
             }
         }
     }
@@ -30,7 +34,11 @@ class GodTest {
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, cos($x), eps=${offset.value}") {
-                assertThat(cos(x, eps)).isCloseTo(cos(x), offset)
+                assertByOffset(
+                    cos(x, eps),
+                    cos(x),
+                    offset
+                )
             }
         }
     }
@@ -40,7 +48,11 @@ class GodTest {
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, ln($x), eps=${offset.value}") {
-                assertThat(ln(x, eps)).isCloseTo(ln(x), offset)
+                assertByOffset(
+                    ln(x, eps),
+                    ln(x),
+                    offset
+                )
             }
         }
     }
@@ -50,29 +62,41 @@ class GodTest {
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, tan($x), eps=${offset.value}") {
-                assertThat(tan(x, eps)).isCloseTo(tan(x), offset)
+                assertByOffset(
+                    tan(x, eps),
+                    tan(x),
+                    offset
+                )
             }
         }
     }
 
     @TestFactory
     fun testCotByStLib(): Collection<DynamicTest> = Cot().let { cot ->
-        val cotOffset = Offset.offset(offset.value*100)
+        val cotOffset = offset(offset.value*100)
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, cot($x), eps=${cotOffset.value}") {
-                assertThat(cot(x, eps)).isCloseTo(cos(x) / sin(x), cotOffset)
+                assertByOffset(
+                    cot(x, eps),
+                    cos(x) / sin(x),
+                    cotOffset
+                )
             }
         }
     }
 
     @TestFactory
     fun testCscByStLib(): Collection<DynamicTest> = Csc().let { csc ->
-        val cscOffset = Offset.offset(offset.value*100)
+        val cscOffset = offset(offset.value*100)
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, csc($x), eps=${cscOffset.value}") {
-                assertThat(csc(x, eps)).isCloseTo(1 / sin(x), cscOffset)
+                assertByOffset(
+                    csc(x, eps),
+                    1 / sin(x),
+                    cscOffset
+                )
             }
         }
     }
@@ -84,7 +108,11 @@ class GodTest {
             range.map { b ->
                 val base = b / 10.0
                 DynamicTest.dynamicTest("$x, log$base ($x), eps=${offset.value}") {
-                    assertThat(log(base, x, eps)).isCloseTo(log(x, base), offset)
+                    assertByOffset(
+                        log(base, x, eps),
+                        log(x, base),
+                        offset
+                    )
                 }
             }
         }.flatten()
@@ -112,9 +140,11 @@ class GodTest {
         return range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, fun($x), eps=$libOffset") {
-                assertThat(
-                    (systemModuleImpl.system(x, eps) - systemModuleImplByStLib.system(x, eps))
-                            / systemModuleImplByStLib.system(x, eps)).isLessThanOrEqualTo(libOffset)
+                assertByOffset(
+                    systemModuleImpl.system(x, eps),
+                    systemModuleImplByStLib.system(x, eps),
+                    offset(libOffset)
+                )
             }
         }
     }
