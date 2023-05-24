@@ -12,12 +12,12 @@ import org.junit.jupiter.params.provider.CsvFileSource
 class SystemTest {
     private val function = SystemModuleImpl(
         TableBaseModule().cos,
+        TableBaseModule().ln,
         Cot(TableBaseModule().cos, Sin(TableBaseModule().cos)),
         Tan(TableBaseModule().cos, Sin(TableBaseModule().cos)),
         Sin(TableBaseModule().cos),
         Log(TableBaseModule().ln),
-        TableBaseModule().ln
-    ).function
+    ).system
     private val eps = 0.00001
     private val offset = Offset.offset(eps)
 

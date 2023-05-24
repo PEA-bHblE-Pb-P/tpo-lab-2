@@ -33,7 +33,7 @@ fun main() {
     val step = 0.1
     var i = start
     while (i < end) {
-        system.function(i, 0.01)
+        system.system(i, 0.01)
         i += step
     }
 }
