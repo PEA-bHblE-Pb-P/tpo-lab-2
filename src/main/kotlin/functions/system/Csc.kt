@@ -13,7 +13,7 @@ class Csc(
         val sinVal = sin(x, eps * 0.1)
 
         val result = when {
-            sinVal == 0.0 -> Double.NaN
+            sinVal == 0.0 -> if (x >= 0) Double.POSITIVE_INFINITY else Double.NEGATIVE_INFINITY
             sinVal.isNaN() || abs(sinVal) < eps -> Double.POSITIVE_INFINITY
             else -> 1.0 / sinVal
         }

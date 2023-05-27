@@ -95,7 +95,7 @@ class GodTest {
             DynamicTest.dynamicTest("$x, csc($x), eps=${cscOffset.value}") {
                 assertByOffset(
                     csc(x, eps),
-                    1 / sin(x),
+                    1.0 / sin(x).roundStLibValue(),
                     cscOffset
                 )
             }
