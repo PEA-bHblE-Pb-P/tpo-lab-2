@@ -11,10 +11,11 @@ class Csc(
 ) : (Double, Double) -> Double {
     override fun invoke(x: Double, eps: Double): Double {
         val sinVal = sin(x, eps * 0.1)
-        val result = if (sinVal.isNaN() || abs(sinVal) < eps) {
-            Double.POSITIVE_INFINITY
-        } else {
-            1.0 / sinVal
+
+        val result = when {
+            sinVal == 0.0 -> Double.NaN
+            sinVal.isNaN() || abs(sinVal) < eps -> Double.POSITIVE_INFINITY
+            else -> 1.0 / sinVal
         }
         return result.also {
             csvLogger?.write("$x,$result")

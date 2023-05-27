@@ -7,6 +7,7 @@ import modules.SystemModuleImpl
 import org.assertj.core.data.Offset.offset
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
+import util.Round.roundStLibValue
 import util.assertByOffset
 import kotlin.math.*
 
@@ -122,12 +123,12 @@ class GodTest {
     fun testSystemByStLib(): Collection<DynamicTest> {
         val libOffset = offset.value * 1000
         val systemModuleImplByStLib = SystemModuleImpl(
-            cos = { x, _ -> cos(x) },
-            ln = { x, _ -> ln(x) },
-            cot = { x, _ -> cos(x) / sin(x) },
-            tan = { x, _ -> tan(x) },
-            sin = { x, _ -> sin(x) },
-            log = { base, x, _ -> log(x, base) }
+            cos = { x, _ -> cos(x).roundStLibValue() },
+            ln = { x, _ -> ln(x).roundStLibValue() },
+            cot = { x, _ -> cos(x).roundStLibValue() / sin(x).roundStLibValue() },
+            tan = { x, _ -> tan(x).roundStLibValue() },
+            sin = { x, _ -> sin(x).roundStLibValue() },
+            log = { base, x, _ -> log(x, base).roundStLibValue() }
         )
         val systemModuleImpl = SystemModuleImpl(
             cos = Cos(),
