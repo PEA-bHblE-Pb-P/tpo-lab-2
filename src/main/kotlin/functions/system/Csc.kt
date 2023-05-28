@@ -2,6 +2,7 @@
 package functions.system
 
 import functions.base.Cos
+import util.CsvUtils.writeRounded
 import java.io.BufferedWriter
 import kotlin.math.abs
 
@@ -18,7 +19,7 @@ class Csc(
             else -> 1.0 / sinVal
         }
         return result.also {
-            csvLogger?.write("$x,$result")
+            csvLogger?.writeRounded(x,result)
             csvLogger?.newLine()
             csvLogger?.flush()
         }

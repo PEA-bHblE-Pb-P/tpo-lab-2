@@ -1,5 +1,6 @@
 package functions.base
 
+import util.CsvUtils.writeRounded
 import java.io.BufferedWriter
 import kotlin.math.absoluteValue
 import kotlin.math.pow
@@ -9,7 +10,7 @@ class Ln(
 ) : (Double, Double) -> Double {
     override fun invoke(x: Double, eps: Double): Double =
         calcThatWorks(x, eps).also {
-            csvLogger?.write("$x,$it")
+            csvLogger?.writeRounded(x,it)
             csvLogger?.newLine()
             csvLogger?.flush()
         }
@@ -22,6 +23,7 @@ class Ln(
         val fastResult = when {
             x == Double.POSITIVE_INFINITY -> Double.POSITIVE_INFINITY
             x == 0.0 -> Double.NEGATIVE_INFINITY
+            x == 1.0 -> 0.0
             x.isNaN() || x < 0.0 -> Double.NaN
             else -> null
         }

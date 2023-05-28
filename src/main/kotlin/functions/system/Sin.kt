@@ -2,6 +2,7 @@
 package functions.system
 
 import functions.base.Cos
+import util.CsvUtils.writeRounded
 import java.io.BufferedWriter
 import kotlin.math.abs
 import kotlin.math.sqrt
@@ -28,7 +29,7 @@ class Sin(
             abs(result) <= eps -> 0.0
             else -> result
         }.also { res ->
-            csvLogger?.write("$x,$res")
+            csvLogger?.writeRounded(x,res)
             csvLogger?.newLine()
             csvLogger?.flush()
         }

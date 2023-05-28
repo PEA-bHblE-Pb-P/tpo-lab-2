@@ -112,7 +112,7 @@ class GodTest {
                 DynamicTest.dynamicTest("$x, log$base ($x), eps=${offset.value}") {
                     assertByOffset(
                         log(base, x, eps),
-                        log(x, base),
+                        log(x, base).roundStLibValue(),
                         offset
                     )
                 }

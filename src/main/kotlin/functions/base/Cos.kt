@@ -1,6 +1,7 @@
 @file:Suppress("MagicNumber")
 package functions.base
 
+import util.CsvUtils.writeRounded
 import java.io.BufferedWriter
 import kotlin.math.abs
 import kotlin.math.absoluteValue
@@ -40,7 +41,7 @@ class Cos(
             }
         }
         return curr.also {
-            csvLogger?.write("$x,$curr")
+            csvLogger?.writeRounded(x,curr)
             csvLogger?.newLine()
             csvLogger?.flush()
         }

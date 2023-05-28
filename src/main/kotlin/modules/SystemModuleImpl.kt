@@ -4,6 +4,7 @@ package modules
 import functions.base.Cos
 import functions.base.Ln
 import functions.system.*
+import util.CsvUtils.writeRounded
 import java.io.BufferedWriter
 import kotlin.math.pow
 
@@ -28,7 +29,7 @@ class SystemModuleImpl(
 
             }
             return result.also {
-                csvLogger?.write("$x,$result")
+                csvLogger?.writeRounded(x,result)
                 csvLogger?.newLine()
                 csvLogger?.flush()
             }
