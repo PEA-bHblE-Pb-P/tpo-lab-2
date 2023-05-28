@@ -1,7 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.7.21"
+    kotlin("jvm") version "1.8.21"
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
     jacoco
+    id("org.jetbrains.kotlin.plugin.allopen").version("1.8.21")
 }
 
 group = "org.example"
@@ -16,6 +17,11 @@ dependencies {
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+}
+
+allOpen {
+    annotation("annotation.MockableFunction")
 }
 
 tasks.test {
