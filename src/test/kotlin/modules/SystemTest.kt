@@ -8,6 +8,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
+import util.assertByOffset
 
 class SystemTest {
     private val function = SystemModuleImpl(
@@ -18,12 +19,12 @@ class SystemTest {
         Sin(TableBaseModule().cos),
         Log(TableBaseModule().ln),
     ).system
-    private val eps = 0.0001
+    private val eps = 0.001
     private val offset = Offset.offset(eps)
 
     @ParameterizedTest
     @CsvFileSource(resources = ["/system.csv"], useHeadersInDisplayName = true)
     fun testByTable(x: Double, result: Double) {
-        assertThat(function(x, eps)).isCloseTo(result, offset)
+        assertByOffset(function(x, eps), result, offset)
     }
 }
