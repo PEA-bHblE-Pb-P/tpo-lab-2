@@ -19,10 +19,11 @@ class Sin(
         var normalizedX = x
         while (normalizedX < 0) normalizedX += 2 * Math.PI
         while (normalizedX > 2 * Math.PI) normalizedX -= 2 * Math.PI
+        val cosVal = cos(xInit, eps)
         val result: Double = if (normalizedX > Math.PI) {
-            -1 * sqrt(1 - cos(xInit, eps) * cos(xInit, eps))
+            -1 * sqrt(1 - cosVal * cosVal)
         } else {
-            sqrt(1 - cos(xInit, eps) * cos(xInit, eps))
+            sqrt(1 - cosVal * cosVal)
         }
         return when {
             abs(result) > 1 -> Double.NaN

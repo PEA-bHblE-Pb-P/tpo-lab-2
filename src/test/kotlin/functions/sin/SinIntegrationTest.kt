@@ -1,15 +1,12 @@
-package functions
+package functions.sin
 
 import functions.system.Sin
 import org.assertj.core.data.Offset
 import org.junit.jupiter.api.DynamicTest
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
 import util.assertByOffset
 
-class SinInternalsTest {
+class SinIntegrationTest {
     private val sin  = Sin()
     private val eps = 0.000000001
     private val offset = Offset.offset(eps)
@@ -23,17 +20,5 @@ class SinInternalsTest {
                 assertByOffset(sin(Math.PI * i, eps), 0.0, offset)
             }
         }
-    }
-
-    @Test
-    fun `sin mocked invalid cos`() {
-        val mockedCos = mock<(Double, Double) -> Double> {
-            on { invoke(1.0, eps) } doReturn -5.0
-        }
-        assertByOffset(
-            Sin(mockedCos).invoke(1.0, eps),
-            Double.NaN,
-            offset
-        )
     }
 }
