@@ -1,5 +1,6 @@
 package util
 
+import util.Round.roundStLibValue
 import util.Round.rounded
 import java.io.BufferedWriter
 import java.util.*
@@ -7,13 +8,13 @@ import kotlin.io.path.Path
 import kotlin.io.path.bufferedWriter
 
 object CsvUtils {
-    fun readCsvFileValues(fileName: String): Map<String, Double> =
+    fun readCsvFileValues(fileName: String): Map<Double, Double> =
         javaClass.getResourceAsStream(fileName)?.bufferedReader().use { reader ->
-            val res = mutableMapOf<String, Double>()
+            val res = mutableMapOf<Double, Double>()
             reader?.readLine() // Headers
             reader?.forEachLine { line ->
                 val (x, y) = line.split(",").map { it.toDouble() }
-                res[x.toString()] = y
+                res[x.roundStLibValue()] = y
             }
             return res
         }

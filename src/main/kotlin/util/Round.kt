@@ -12,5 +12,5 @@ object Round {
     fun Double.roundStLibValue() =
         if (this.isNaN() || this.isInfinite())
             this
-        else (this * 1E14).roundToLong() / 1E14
+        else (this * 1E13).roundToLong() / 1E13
 }
