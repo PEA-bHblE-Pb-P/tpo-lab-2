@@ -10,8 +10,12 @@ class Log(
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double, Double) -> Double {
     override fun invoke(a: Double, b: Double, eps: Double): Double {
+        val lnB = ln(b, eps * 0.2)
+        val lnA = ln(a, eps * 0.2)
 
-        return ln(b, eps * 0.2) / ln(a, eps * 0.2).also { res ->
+        if (lnA == 0.0) return Double.NaN
+
+        return lnB / lnA.also { res ->
             csvLogger?.writeRounded3(a,b,res)
             csvLogger?.newLine()
             csvLogger?.flush()

@@ -1,4 +1,4 @@
-package functions
+package functions.ln
 
 import functions.base.Ln
 import org.assertj.core.api.Assertions.assertThat
@@ -10,7 +10,7 @@ import util.assertByOffset
 import kotlin.Double.Companion.NEGATIVE_INFINITY
 import kotlin.Double.Companion.POSITIVE_INFINITY
 
-class LnInternalsTest {
+class LnUnitTest {
     private val ln = Ln()
     private val eps = 0.00001
     private val offset = Offset.offset(eps)
