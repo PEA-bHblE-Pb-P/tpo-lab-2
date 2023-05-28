@@ -7,6 +7,7 @@ import modules.SystemModuleImpl
 import org.assertj.core.data.Offset.offset
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
+import util.CsvUtils
 import util.Round.roundStLibValue
 import util.assertByOffset
 import kotlin.math.*
@@ -18,7 +19,7 @@ class GodTest {
     private val smallRange = (-100..100).toList()
 
     @TestFactory
-    fun testSinByStLib(): Collection<DynamicTest> = Sin(cos = {x, _ -> cos(x) }).let { sin ->
+    fun testSinByStLib(): Collection<DynamicTest> = Sin(cos = { x, _ -> cos(x) }).let { sin ->
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, sin($x), eps=${offset.value}") {
@@ -75,7 +76,7 @@ class GodTest {
 
     @TestFactory
     fun testCotByStLib(): Collection<DynamicTest> = Cot().let { cot ->
-        val cotOffset = offset(offset.value*100)
+        val cotOffset = offset(offset.value * 100)
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, cot($x), eps=${cotOffset.value}") {
@@ -90,7 +91,7 @@ class GodTest {
 
     @TestFactory
     fun testCscByStLib(): Collection<DynamicTest> = Csc().let { csc ->
-        val cscOffset = offset(offset.value*100)
+        val cscOffset = offset(offset.value * 100)
         range.map {
             val x = it / 10.0
             DynamicTest.dynamicTest("$x, csc($x), eps=${cscOffset.value}") {
@@ -127,9 +128,11 @@ class GodTest {
             cos = { x, _ -> cos(x).roundStLibValue() },
             ln = { x, _ -> ln(x).roundStLibValue() },
             cot = { x, _ -> cos(x).roundStLibValue() / sin(x).roundStLibValue() },
+            csc = { x, _ -> 1.0 / sin(x).roundStLibValue() },
             tan = { x, _ -> tan(x).roundStLibValue() },
             sin = { x, _ -> sin(x).roundStLibValue() },
-            log = { base, x, _ -> log(x, base).roundStLibValue() }
+            log = { base, x, _ -> log(x, base).roundStLibValue() },
+            csvLogger = CsvUtils.csvFileWriter("System2.csv", "x,system(x)"),
         )
         val systemModuleImpl = SystemModuleImpl(
             cos = Cos(),
@@ -137,7 +140,9 @@ class GodTest {
             cot = Cot(),
             tan = Tan(),
             sin = Sin(),
-            log = Log()
+            log = Log(),
+            csc = Csc(),
+            csvLogger = CsvUtils.csvFileWriter("System.csv", "x,system(x)"),
         )
         return range.map {
             val x = it / 10.0

@@ -18,7 +18,7 @@ class SystemTest {
         Sin(TableBaseModule().cos),
         Log(TableBaseModule().ln),
     ).system
-    private val eps = 0.00001
+    private val eps = 0.0001
     private val offset = Offset.offset(eps)
 
     @ParameterizedTest

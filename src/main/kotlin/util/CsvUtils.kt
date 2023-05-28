@@ -7,13 +7,13 @@ import kotlin.io.path.Path
 import kotlin.io.path.bufferedWriter
 
 object CsvUtils {
-    fun readCsvFileValues(fileName: String): Map<Double, Double> =
+    fun readCsvFileValues(fileName: String): Map<String, Double> =
         javaClass.getResourceAsStream(fileName)?.bufferedReader().use { reader ->
-            val res = mutableMapOf<Double, Double>()
+            val res = mutableMapOf<String, Double>()
             reader?.readLine() // Headers
             reader?.forEachLine { line ->
                 val (x, y) = line.split(",").map { it.toDouble() }
-                res[x] = y
+                res[x.toString()] = y
             }
             return res
         }
