@@ -4,7 +4,6 @@ import functions.system.Cot
 import functions.system.Log
 import functions.system.Sin
 import functions.system.Tan
-import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
@@ -20,11 +19,11 @@ class SystemTest {
         Log(TableBaseModule().ln),
     ).system
     private val eps = 0.001
-    private val offset = Offset.offset(eps)
+    private val secondaryEps = 0.0000001
 
     @ParameterizedTest
     @CsvFileSource(resources = ["/system.csv"], useHeadersInDisplayName = true)
     fun testByTable(x: Double, result: Double) {
-        assertByOffset(function(x, eps), result, offset)
+        assertByOffset(function(x, secondaryEps), result, Offset.offset(eps))
     }
 }

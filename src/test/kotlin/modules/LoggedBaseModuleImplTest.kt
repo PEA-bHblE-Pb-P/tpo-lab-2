@@ -11,7 +11,7 @@ class LoggedBaseModuleImplTest {
     @Test
     fun `ln is logged`() {
         module.ln(0.0, 0.01)
-        assertThat(Path("ln").readLines())
+        assertThat(Path("ln.csv").readLines())
             .isEqualTo(listOf("x,ln(x)","0.0,-Infinity"))
     }
 
@@ -19,7 +19,7 @@ class LoggedBaseModuleImplTest {
     fun `header is written once`() {
         module.ln(0.0, 0.01)
         module.ln(0.0, 0.01)
-        assertThat(Path("ln").readLines())
+        assertThat(Path("ln.csv").readLines())
             .isEqualTo(listOf("x,ln(x)","0.0,-Infinity","0.0,-Infinity"))
     }
 }

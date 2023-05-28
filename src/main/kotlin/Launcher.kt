@@ -26,13 +26,14 @@ fun main() {
         Csc(Sin(base.cos)),
         CsvUtils.csvFileWriter("System.csv", "x,system(x)"),
     )
-    val start = 0.0
-    val end = 5.0
-    val step = 0.1
-    var i = 0
-    while (start + i*step <= end) {
-        system.system(start + i*step, 0.00000001)
-        i += 1
-    }
+//    val start = -15.0
+//    val end = 0.0
+//    val step = 0.1
+//    var i = 0
+//    while (start + i*step <= end) {
+//        system.system(start + i*step, 0.000000001)
+//        i += 1
+//    }
+    system.system(-11.0, 0.0000001)
 
 }
