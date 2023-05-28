@@ -1,18 +1,19 @@
-package modules
+package functions.cos
 
+import modules.BaseModuleImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
 
-class LnTest {
-    private val ln = BaseModuleImpl().ln
+class CosTableTest {
+    private val cos = BaseModuleImpl().cos
     private val eps = 0.00000000001
     private val offset = Offset.offset(0.000000001)
 
     @ParameterizedTest
-    @CsvFileSource(resources = ["/ln.csv"], useHeadersInDisplayName = true)
+    @CsvFileSource(resources = ["/cos.csv"], useHeadersInDisplayName = true)
     fun testByTable(x: Double, result: Double) {
-        assertThat(ln(x, eps)).isCloseTo(result, offset)
+        assertThat(cos(x, eps)).isCloseTo(result, offset)
     }
 }
