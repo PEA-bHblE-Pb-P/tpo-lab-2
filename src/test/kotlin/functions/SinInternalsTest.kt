@@ -1,6 +1,5 @@
 package functions
 
-import functions.base.Cos
 import functions.system.Sin
 import org.assertj.core.data.Offset
 import org.junit.jupiter.api.DynamicTest
@@ -28,10 +27,9 @@ class SinInternalsTest {
 
     @Test
     fun `sin mocked invalid cos`() {
-        val mockedCos = mock<Cos> {
+        val mockedCos = mock<(Double, Double) -> Double> {
             on { invoke(1.0, eps) } doReturn -5.0
         }
-        println(mockedCos(1.0, eps))
         assertByOffset(
             Sin(mockedCos).invoke(1.0, eps),
             Double.NaN,

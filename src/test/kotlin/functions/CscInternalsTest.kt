@@ -1,7 +1,6 @@
 package functions
 
 import functions.system.Csc
-import functions.system.Sin
 import org.assertj.core.data.Offset
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
@@ -9,6 +8,7 @@ import org.junit.jupiter.api.TestFactory
 import org.mockito.Mockito.anyDouble
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import util.Round.roundStLibValue
 import util.assertByOffset
 import kotlin.math.sin
@@ -37,14 +37,16 @@ class CscInternalsTest {
 
     @Test
     fun `csc mocked division by zero`() {
-        val mockedSin = mock<Sin> {
+        val mockedSin = mock<(Double, Double) -> Double> {
             on { invoke(anyDouble(), anyDouble()) } doReturn 0.0
         }
-        println(mockedSin.invoke(1.0, 0.0))
+
         assertByOffset(
             Csc(mockedSin).invoke(1.0, eps),
-            Double.NaN,
+            Double.POSITIVE_INFINITY,
             offset
         )
+
+        verify(mockedSin).invoke(1.0, eps*0.1)
     }
 }

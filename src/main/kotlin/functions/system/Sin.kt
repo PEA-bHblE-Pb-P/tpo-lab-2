@@ -1,13 +1,11 @@
 @file:Suppress("MagicNumber")
 package functions.system
 
-import annotation.MockableFunction
 import functions.base.Cos
 import java.io.BufferedWriter
 import kotlin.math.abs
 import kotlin.math.sqrt
 
-@MockableFunction
 class Sin(
     private val cos: (Double, Double) -> Double = Cos(),
     private val csvLogger: BufferedWriter? = null

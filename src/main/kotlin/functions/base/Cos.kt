@@ -1,13 +1,11 @@
 @file:Suppress("MagicNumber")
 package functions.base
 
-import annotation.MockableFunction
 import java.io.BufferedWriter
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
-@MockableFunction
 class Cos(
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double) -> Double {
