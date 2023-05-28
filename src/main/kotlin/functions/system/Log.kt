@@ -13,7 +13,9 @@ class Log(
         val lnB = ln(b, eps * 0.2)
         val lnA = ln(a, eps * 0.2)
 
-        if (lnA == 0.0) return Double.NaN
+        if (lnA == 0.0) {
+            return if (lnB.isInfinite()) lnB else Double.NaN
+        }
 
         return lnB / lnA.also { res ->
             csvLogger?.writeRounded3(a,b,res)
