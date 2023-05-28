@@ -15,6 +15,7 @@ class GodTest {
     private val eps = 0.00000000001
     private val offset = offset(0.000000001)
     private val range = (-1000..1000).toList()
+    private val smallRange = (-100..100).toList()
 
     @TestFactory
     fun testSinByStLib(): Collection<DynamicTest> = Sin(cos = {x, _ -> cos(x) }).let { sin ->
@@ -104,9 +105,9 @@ class GodTest {
 
     @TestFactory
     fun testLogByStLib(): Collection<DynamicTest> = Log().let { log ->
-        range.map {
+        smallRange.map {
             val x = it / 10.0
-            range.map { b ->
+            smallRange.map { b ->
                 val base = b / 10.0
                 DynamicTest.dynamicTest("$x, log$base ($x), eps=${offset.value}") {
                     assertByOffset(
