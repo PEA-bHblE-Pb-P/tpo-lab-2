@@ -2,6 +2,7 @@ package util
 
 import util.Round.rounded
 import java.io.BufferedWriter
+import java.util.*
 import kotlin.io.path.Path
 import kotlin.io.path.bufferedWriter
 
@@ -24,10 +25,10 @@ object CsvUtils {
         }
 
     fun BufferedWriter?.writeRounded(x: Double, result: Double) {
-        this?.write("$x,${result.rounded()}")
+        this?.write("${x.rounded()},${result.rounded()}")
     }
 
     fun BufferedWriter?.writeRounded3(a: Double, b: Double, result: Double) {
-        this?.write("$a,$b,${result.rounded()}")
+        this?.write("${a.rounded()},${b.rounded()},${result.rounded()}")
     }
 }
