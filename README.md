@@ -34,6 +34,5 @@
 ![img2.png](img%2Fimg2.png)
 
 ```
-x <= 0 : (((((tan(x) - cot(x)) / cot(x)) ^ 3) + cos(x)) ^ 2)
-x > 0 : (((((log_3(x) * log_10(x)) + log_5(x)) + (log_3(x) - log_10(x))) / log_2(x)) + (log_2(x) + (ln(x) + log_2(x))))
-```
+x <= 0 : (((((tan(x) ^ 3) / (csc(x) + sin(x))) - cot(x)) ^ 3) / csc(x))
+x > 0 : (((((log_10(x) ^ 2) + (log_10(x) ^ 3)) - log_3(x)) - (log_3(x) - log_10(x))) ^ 3)```

@@ -142,7 +142,7 @@ class GodTest {
             sin = Sin(),
             log = Log(),
             csc = Csc(),
-            csvLogger = CsvUtils.csvFileWriter("System.csv", "x,system(x)"),
+            csvLogger = CsvUtils.csvFileWriter("system.csv", "x,system(x)"),
         )
         return range.map {
             val x = it / 10.0

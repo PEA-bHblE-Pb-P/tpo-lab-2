@@ -26,10 +26,11 @@ object CsvUtils {
         }
 
     fun BufferedWriter?.writeRounded(x: Double, result: Double) {
-        this?.write("${x.rounded()},${result.rounded()}")
+        this?.write("${x.rounded()},$result")
+//        this?.write("${x.roundStLibValue()},${result.roundStLibValue()}")
     }
 
     fun BufferedWriter?.writeRounded3(a: Double, b: Double, result: Double) {
-        this?.write("${a.rounded()},${b.rounded()},${result.rounded()}")
+        this?.write("${a.rounded()},${b.rounded()},$result")
     }
 }

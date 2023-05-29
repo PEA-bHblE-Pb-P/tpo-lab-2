@@ -10,7 +10,7 @@ fun main() {
     val base = LoggedBaseModuleImpl()
     val system = SystemModuleImpl(
         Cos(CsvUtils.csvFileWriter("cos.csv", "x,cos(x)")),
-        Ln(CsvUtils.csvFileWriter("Ln.csv", "x,ln(x)")),
+        Ln(CsvUtils.csvFileWriter("_ln.csv", "x,ln(x)")),
         Cot(
             base.cos,
             Sin(base.cos, CsvUtils.csvFileWriter("cot.sin.csv", "x,sin(x)")),
@@ -23,17 +23,17 @@ fun main() {
         ),
         Sin(base.cos, CsvUtils.csvFileWriter("sin.csv", "x,sin(x)")),
         Log(base.ln, CsvUtils.csvFileWriter("log.csv", "x,log(x)")),
-        Csc(Sin(base.cos)),
+        Csc(Sin(base.cos), CsvUtils.csvFileWriter("csc.csv", "x,log(x)")),
         CsvUtils.csvFileWriter("System.csv", "x,system(x)"),
     )
-//    val start = -15.0
-//    val end = 0.0
-//    val step = 0.1
-//    var i = 0
-//    while (start + i*step <= end) {
-//        system.system(start + i*step, 0.000000001)
-//        i += 1
-//    }
-    system.system(-11.0, 0.0000001)
+    var start = 0.0
+    var end = 100.0
+    var step = 0.01
+    var i = 0
+    while (start + i*step <= end) {
+        system.system(start + i*step, 0.0000001)
+        i += 1
+    }
+
 
 }

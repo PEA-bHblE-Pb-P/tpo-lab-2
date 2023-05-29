@@ -19,7 +19,7 @@ class Log(
             return if (lnB.isInfinite()) lnB else Double.NaN
         }
 
-        return lnB / lnA.also { res ->
+        return (lnB / lnA).also { res ->
             csvLogger?.writeRounded3(a,b,res)
             csvLogger?.newLine()
             csvLogger?.flush()

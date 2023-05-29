@@ -3,16 +3,15 @@ package modules
 import util.CsvUtils.readCsvFileValues
 import util.Round.roundStLibValue
 
-class TableBaseModule : BaseModule {
-    private val lnTableValues = readCsvFileValues("/ln.csv")
-    private val cosTableValues = readCsvFileValues("/cos.csv")
-    private val sinTableValues = readCsvFileValues("/sin.csv")
-    private val tanTableValues = readCsvFileValues("/tan.csv")
-    private val cotTableValues = readCsvFileValues("/cot.csv")
-    private val log2TableValues = readCsvFileValues("/log2.csv")
-    private val log3TableValues = readCsvFileValues("/log3.csv")
-    private val log5TableValues = readCsvFileValues("/log5.csv")
-    private val log10TableValues = readCsvFileValues("/log10.csv")
+class TableBaseModule(folder: String = "") : BaseModule {
+    private val lnTableValues = readCsvFileValues("$folder/ln.csv")
+    private val cosTableValues = readCsvFileValues("$folder/cos.csv")
+    private val sinTableValues = readCsvFileValues("$folder/sin.csv")
+    private val tanTableValues = readCsvFileValues("$folder/tan.csv")
+    private val cotTableValues = readCsvFileValues("$folder/cot.csv")
+    private val cscTableValues = readCsvFileValues("$folder/csc.csv")
+    private val log3TableValues = readCsvFileValues("$folder/log3.csv")
+    private val log10TableValues = readCsvFileValues("$folder/log10.csv")
 
     override val ln: (Double, Double) -> Double
         get() = { x, _ -> lnTableValues[x.roundStLibValue()] ?: throw IllegalStateException("No table value for ${x.roundStLibValue()} in ln") }
@@ -26,12 +25,13 @@ class TableBaseModule : BaseModule {
         get() = { x, _ -> tanTableValues[x.roundStLibValue()] ?: throw IllegalStateException("No table value for ${x.roundStLibValue()} in tan") }
     val cot: (Double, Double) -> Double
         get() = { x, _ -> cotTableValues[x.roundStLibValue()] ?: throw IllegalStateException("No table value for ${x.roundStLibValue()} in cot") }
+    val csc: (Double, Double) -> Double
+        get() = { x, _ -> cscTableValues[x.roundStLibValue()] ?: throw IllegalStateException("No table value for ${x.roundStLibValue()} in csc") }
+
     val log: (Double, Double, Double) -> Double
         get() = { a, b, _ ->
             when (a) {
-                2.0 -> log2TableValues[b.roundStLibValue()] ?: throw IllegalStateException("No table value for ${b.roundStLibValue()} in ln2")
                 3.0 -> log3TableValues[b.roundStLibValue()] ?: throw IllegalStateException("No table value for ${b.roundStLibValue()} in ln3")
-                5.0 -> log5TableValues[b.roundStLibValue()] ?: throw IllegalStateException("No table value for ${b.roundStLibValue()} in ln5")
                 10.0 -> log10TableValues[b.roundStLibValue()] ?: throw IllegalStateException("No table value for ${b.roundStLibValue()} in ln10")
                 else -> {
                     throw IllegalStateException("No table value for a = $a")
