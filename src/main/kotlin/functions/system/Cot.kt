@@ -12,8 +12,8 @@ class Cot(
     private val csvLogger: BufferedWriter? = null
 ) : (Double, Double) -> Double {
     override fun invoke(x: Double, eps: Double): Double {
-        val cosVal = cos(x, eps * 0.1)
-        val sinVal = sin(x, eps * 0.1)
+        val cosVal = cos(x, eps)
+        val sinVal = sin(x, eps)
         val result = when {
             (cosVal.isNaN() || sinVal.isNaN() || abs(sinVal) < eps) -> Double.POSITIVE_INFINITY
             else -> cosVal / sinVal
