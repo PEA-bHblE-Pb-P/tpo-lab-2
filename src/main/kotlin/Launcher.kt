@@ -26,9 +26,9 @@ fun main() {
         Csc(Sin(base.cos), CsvUtils.csvFileWriter("csc.csv", "x,log(x)")),
         CsvUtils.csvFileWriter("System.csv", "x,system(x)"),
     )
-    var start = 0.0
-    var end = 100.0
-    var step = 0.01
+    val start = 0.0
+    val end = 100.0
+    val step = 0.01
     var i = 0
     while (start + i*step <= end) {
         system.system(start + i*step, 0.0000001)

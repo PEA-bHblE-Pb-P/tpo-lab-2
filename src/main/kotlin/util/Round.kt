@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package util
 
 import kotlin.math.roundToLong
