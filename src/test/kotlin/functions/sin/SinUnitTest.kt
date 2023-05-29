@@ -9,13 +9,15 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import util.assertByOffset
+import kotlin.Double.Companion.NEGATIVE_INFINITY
+import kotlin.Double.Companion.POSITIVE_INFINITY
 
 class SinUnitTest {
     private val eps = 0.000000001
     private val offset = Offset.offset(eps)
 
     @ParameterizedTest
-    @ValueSource(doubles = [-5.0, 1.000001, 2.0])
+    @ValueSource(doubles = [-5.0, 1.000001, 2.0, Double.NaN, NEGATIVE_INFINITY, POSITIVE_INFINITY])
     @DisplayName("sin when cos is invalid")
     fun `sin mocked invalid cos`(cosValue: Double) {
         val mockedCos = mock<(Double, Double) -> Double> {

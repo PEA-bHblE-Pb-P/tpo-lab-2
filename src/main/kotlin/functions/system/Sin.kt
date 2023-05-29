@@ -26,7 +26,6 @@ class Sin(
             sqrt(1 - cosVal * cosVal)
         }
         return when {
-            abs(result) > 1 -> Double.NaN
             abs(result) <= eps -> 0.0
             else -> result
         }.also { res ->
